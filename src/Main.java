@@ -17,21 +17,33 @@ public class Main {
                 System.out.println("Fehler: Das obere Preislimit muss größer als das untere Preislimit sein.");
             }
         }
-
-        // Berechnung der Schrittweite für den Preis
+        
         double preisSchrittweite = (oberesLimit - unteresLimit) / 10;
+        int[] stueckzahlen = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
 
-        // Ausgabe der nummerierten Liste
-        System.out.println("Nummerierte Liste:");
-        for (int stueck = 10; stueck <= 100; stueck += 10) {
-            double aktuellerPreis = unteresLimit + (stueck / 10 - 1) * preisSchrittweite;
-            System.out.printf("Stückzahl: %d - Einzelpreis: %.2f\n", stueck, aktuellerPreis);
+        // Ausgabe der Kopfzeile für Einzelpreise
+        System.out.print("Stk/Einzelpreis\n");
+        for (int i = 0; i <= 10; i++) {
+            double einzelPreis = unteresLimit + i * preisSchrittweite;
+            System.out.printf("     %.2f\t", einzelPreis);
+        }
+        System.out.println();
+
+        // Ausgabe der Tabelle
+        for (int stueck : stueckzahlen) {
+            System.out.print(stueck + "\t");
+            for (int i = 0; i <= 10; i++) {
+                double einzelPreis = unteresLimit + i * preisSchrittweite;
+                double gesamtPreis = einzelPreis * stueck;
+                System.out.printf("%.2f\t\t", gesamtPreis);
+            }
+            System.out.println();
         }
 
         scanner.close();
     }
 
-    // Methode zur Validierung der Double-Eingabe
+    // Methode zur Validierung der Eingabe eines gültigen Double-Werts
     public static double getValidDouble(Scanner scanner, String prompt) {
         double number;
         while (true) {
